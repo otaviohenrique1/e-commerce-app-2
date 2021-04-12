@@ -1,9 +1,24 @@
-import { Container, Row, Col, Button, Alert, Label, FormGroup, Input, InputGroup, InputGroupAddon, InputGroupText } from "reactstrap";
+import { Container, Row, Col, Button, Alert } from "reactstrap";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import "./style.css"
+import Campo from "../../components/Campo/input";
 
 export default function ProdutoCadastro() {
+  const initialValues = {
+    nome: '',
+    descricao: '',
+    preco: '',
+    publicacao: '',
+  };
+  
+  const validationSchema = Yup.object().shape({
+    nome: Yup.string().required('O campo nome é obrigatorio'),
+    descricao: Yup.string().required('O campo descricao é obrigatorio'),
+    preco: Yup.number().required('O campo preco é obrigatorio'),
+    publicacao: Yup.date().required('O campo publicação é obrigatorio'),
+  });
+
   return (
     <Container>
       <Row>
@@ -18,50 +33,42 @@ export default function ProdutoCadastro() {
       >
         {({errors, touched}) => (
           <Form>
-            <FormGroup>
-              <InputGroup>
-                <InputGroupAddon addonType="prepend">
-                  <InputGroupText>
-                    <Label htmlFor="nome">Nome</Label>
-                  </InputGroupText>
-                </InputGroupAddon>
-                <Input type="text" name="nome" id="nome" placeholder="Digite o nome do produto" />
-              </InputGroup>
-              <span>{(errors.nome && touched.nome) ? (<Alert color="danger">{errors.nome}</Alert>) : null}</span>
-            </FormGroup>
-            <FormGroup>
-              <InputGroup>
-                <InputGroupAddon addonType="prepend">
-                  <InputGroupText>
-                    <Label htmlFor="descricao">Descrição</Label>
-                  </InputGroupText>
-                </InputGroupAddon>
-                <Input type="textarea" name="descricao" id="descricao" placeholder="Digite a descricao do produto" />
-              </InputGroup>
-              <span>{(errors.descricao && touched.descricao) ? (<Alert color="danger">{errors.descricao}</Alert>) : null}</span>
-            </FormGroup>
-            <FormGroup>
-              <InputGroup>
-                <InputGroupAddon addonType="prepend">
-                  <InputGroupText>
-                    <Label htmlFor="preco">Preço</Label>
-                  </InputGroupText>
-                </InputGroupAddon>
-                <Input type="number" name="preco" id="preco" placeholder="Digite o preço do produto" />
-              </InputGroup>
-              <span>{(errors.preco && touched.preco) ? (<Alert color="danger">{errors.preco}</Alert>) : null}</span>
-            </FormGroup>
-            <FormGroup>
-              <InputGroup>
-                <InputGroupAddon addonType="prepend">
-                  <InputGroupText>
-                    <Label htmlFor="publicacao">Publicação</Label>
-                  </InputGroupText>
-                </InputGroupAddon>
-                <Input type="date" name="publicacao" id="publicacao" placeholder="Digite a data de publicacao do produto" />
-              </InputGroup>
-              <span>{(errors.publicacao && touched.publicacao) ? (<Alert color="danger">{errors.publicacao}</Alert>) : null}</span>
-            </FormGroup>
+            <Campo
+              htmlFor="nome"
+              label="Nome"
+              typeInput="text"
+              nameInput="nome"
+              idInput="nome"
+              placeholderInput="Digite o nome do produto"
+              erro={(errors.nome && touched.nome) ? (<Alert color="danger">{errors.nome}</Alert>) : null}
+            />
+            <Campo
+              htmlFor="descricao"
+              label="Descrição"
+              typeInput="textarea"
+              nameInput="descricao"
+              idInput="descricao"
+              placeholderInput="Digite a descricao do produto"
+              erro={(errors.descricao && touched.descricao) ? (<Alert color="danger">{errors.descricao}</Alert>) : null}
+            />
+            <Campo
+              htmlFor="preco"
+              label="Preço"
+              typeInput="number"
+              nameInput="preco"
+              idInput="preco"
+              placeholderInput="Digite o preço do produto"
+              erro={(errors.preco && touched.preco) ? (<Alert color="danger">{errors.preco}</Alert>) : null}
+            />
+            <Campo
+              htmlFor="publicacao"
+              label="Publicação"
+              typeInput="date"
+              nameInput="publicacao"
+              idInput="publicacao"
+              placeholderInput="Digite a data de publicacao do produto"
+              erro={(errors.publicacao && touched.publicacao) ? (<Alert color="danger">{errors.publicacao}</Alert>) : null}
+            />
             <Button color="primary" type="submit">Salvar</Button>
           </Form>
         )}
@@ -69,17 +76,3 @@ export default function ProdutoCadastro() {
     </Container>
   );
 }
-
-const initialValues = {
-  nome: '',
-  descricao: '',
-  preco: '',
-  publicacao: '',
-};
-
-const validationSchema = Yup.object().shape({
-  nome: Yup.string().required('O campo nome é obrigatorio'),
-  descricao: Yup.string().required('O campo descricao é obrigatorio'),
-  preco: Yup.number().required('O campo preco é obrigatorio'),
-  publicacao: Yup.date().required('O campo publicação é obrigatorio'),
-});
