@@ -11,9 +11,10 @@ interface CampoProps {
   nameInput?: string;
   idInput?: string;
   erro?: any;
+  valueInput?: any;
 }
 
-export default function Campo({ htmlFor, label, placeholderInput, typeInput, nameInput, idInput, erro }: CampoProps) {
+export default function Campo({ htmlFor, label, placeholderInput, typeInput, nameInput, idInput, erro, valueInput }: CampoProps) {
   return (
     <FormGroup>
       <InputGroup>
@@ -22,7 +23,14 @@ export default function Campo({ htmlFor, label, placeholderInput, typeInput, nam
             <Label htmlFor={htmlFor}>{label}</Label>
           </InputGroupText>
         </InputGroupAddon>
-        <Field className="form-control" type={typeInput} name={nameInput} id={idInput} placeholder={placeholderInput}/>
+        <Field
+          className="form-control"
+          type={typeInput}
+          name={nameInput}
+          id={idInput}
+          placeholder={placeholderInput}
+          value={valueInput}
+        />
       </InputGroup>
       <span>{erro}</span>
     </FormGroup>
