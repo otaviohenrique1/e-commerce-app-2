@@ -9,6 +9,7 @@ import UsuarioCadastro from "./pages/UsuarioCadastro";
 import UsuarioLista from "./pages/UsuarioLista";
 import ProdutoDados from "./pages/ProdutoDados";
 import PaginaErro404 from "./pages/PaginaErro404";
+import CampoImagem from "./pages/CampoImagem";
 
 export default function Routes() {
   return(
@@ -24,6 +25,7 @@ export default function Routes() {
             <Route component={ProdutoDados} path="/produto-dados" />
             <Route component={UsuarioCadastro} path="/usuario-cadastro" />
             <Route component={UsuarioLista} path="/usuario-lista" />
+            <Route component={CampoImagem} path="/campo-imagem" />
             <Route component={PaginaErro404} path="*" />
           </Switch>
         </PageContainer>
