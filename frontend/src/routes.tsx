@@ -7,6 +7,8 @@ import ProdutoCadastro from "./pages/ProdutoCadastro";
 import ProdutoLista from "./pages/ProdutoLista";
 import UsuarioCadastro from "./pages/UsuarioCadastro";
 import UsuarioLista from "./pages/UsuarioLista";
+import ProdutoDados from "./pages/ProdutoDados";
+import PaginaErro404 from "./pages/PaginaErro404";
 
 export default function Routes() {
   return(
@@ -19,8 +21,10 @@ export default function Routes() {
             <Route exact component={Login} path="/login" />
             <Route component={ProdutoCadastro} path="/produto-cadastro" />
             <Route component={ProdutoLista} path="/produto-lista" />
+            <Route component={ProdutoDados} path="/produto-dados" />
             <Route component={UsuarioCadastro} path="/usuario-cadastro" />
             <Route component={UsuarioLista} path="/usuario-lista" />
+            <Route component={PaginaErro404} path="*" />
           </Switch>
         </PageContainer>
       </BrowserRouter>

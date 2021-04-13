@@ -17,15 +17,32 @@ export default function ListaProdutos() {
       });
   }, []);
 
+  function handleView() {
+    alert('Exibir Produto');
+  }
+
+  function handleUpdate() {
+    alert('Editar Produto');
+  }
+
+  function handleDelete() {
+    alert('Remover Produto');
+  }
+
   return (
     <>
       <h1 className="mb-5 mt-5">Lista de Produtos</h1>
       <div>
         {produto.map((item, index) => {
-          return <ItemProduto
-            nome={item.nome}
-            preco={item.preco}
-          />;
+          return (
+            <ItemProduto
+              nome={item.nome}
+              preco={item.preco}
+              onClickView={handleView}
+              onClickUpdate={handleUpdate}
+              onClickDelete={handleDelete}
+            />
+          );
         })}
       </div>
     </>

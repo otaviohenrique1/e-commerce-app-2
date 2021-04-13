@@ -32,17 +32,23 @@ export const Item: React.FC<ItemProps> = ({ valorCampo1, valorCampo2, onClickVie
                 type="button"
                 color="info"
                 onClick={onClickView}
-              >Exibir</Button>
+              >
+                Exibir
+              </Button>
               <Button
                 type="button"
                 color="primary"
                 onClick={onClickUpdate}
-              >Alterar</Button>
+              >
+                Alterar
+              </Button>
               <Button
                 type="button"
                 color="danger"
                 onClick={onClickDelete}
-              >Remover</Button>
+              >
+                Remover
+              </Button>
             </ButtonGroup>
           </Col>
         </Row>
