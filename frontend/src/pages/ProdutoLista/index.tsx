@@ -33,17 +33,24 @@ export default function ListaProdutos() {
     <>
       <h1 className="mb-5 mt-5">Lista de Produtos</h1>
       <div>
-        {produto.map((item, index) => {
-          return (
-            <ItemProduto
-              nome={item.nome}
-              preco={item.preco}
-              onClickView={handleView}
-              onClickUpdate={handleUpdate}
-              onClickDelete={handleDelete}
-            />
-          );
-        })}
+        {(produto.length !== 0) ? (
+          produto.map((item, index) => {
+            return (
+              <ItemProduto
+                key={index}
+                nome={item.nome}
+                preco={item.preco}
+                onClickView={handleView}
+                onClickUpdate={handleUpdate}
+                onClickDelete={handleDelete}
+              />
+            );
+          })
+        ) : (
+          <div>
+            <h1>Lista vazia</h1>
+          </div>
+        )}
       </div>
     </>
   );

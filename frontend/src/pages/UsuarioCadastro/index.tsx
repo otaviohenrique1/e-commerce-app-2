@@ -4,6 +4,13 @@ import * as Yup from "yup";
 import "./style.css"
 import Campo from "../../components/Campo";
 import { useHistory } from "react-router-dom";
+import api from "../../services/api";
+
+interface FormTypes {
+    nome: string;
+    email: string;
+    senha: string;
+}
 
 export default function CadastroUsuarios() {
   const history = useHistory();
@@ -20,6 +27,17 @@ export default function CadastroUsuarios() {
     preco: Yup.string().required('O campo senha é obrigatorio'),
   });
 
+  async function handleSubmitForm(values: FormTypes) {
+    const data = new FormData();
+    data.append('nome', values.nome);
+    data.append('email', values.email);
+    data.append('senha', values.senha);
+    await api.post('produtos', data);
+    // console.log(data);
+    alert('Cadastro realizado com sucesso!');
+    history.push('/usuarios');
+  }
+
   return (
     <Container>
       <Row>
@@ -30,15 +48,7 @@ export default function CadastroUsuarios() {
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
-        onSubmit={(values) => {
-          const data = new FormData();
-          data.append('nome', values.nome);
-          data.append('email', values.email);
-          data.append('senha', values.senha);
-          console.log(data);
-          alert('Cadastro realizado com sucesso!');
-          history.push('/usuario-lista');
-        }}
+        onSubmit={(values) => handleSubmitForm(values)}
       >
         {({errors, touched}) => (
           <Form>

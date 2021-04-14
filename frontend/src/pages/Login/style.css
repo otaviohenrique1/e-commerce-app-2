@@ -4,9 +4,9 @@ label {
 
 .button-container {
   margin-top: 30px;
-  text-align: right;
+  text-align: right !important;
 }
 
-.button-container button:last-child {
+/* .button-container button:last-child {
   margin-left: 10px;
-}
+} */

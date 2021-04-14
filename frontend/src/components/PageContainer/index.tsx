@@ -1,5 +1,6 @@
 import { ReactNode } from "react";
 import { Container } from "reactstrap";
+import Header from "../../components/Header";
 
 interface PageContainerProps {
   children: ReactNode;
@@ -7,6 +8,9 @@ interface PageContainerProps {
 
 export default function PageContainer({ children }: PageContainerProps) {
   return (
-    <Container>{children}</Container>
+    <>
+      <Header />
+      <Container>{children}</Container>
+    </>
   );
 }

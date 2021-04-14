@@ -1,12 +1,13 @@
-import { Container, Row, Col, Button, Alert } from "reactstrap";
+import { Container, Row, Col, Button, ButtonGroup, Alert } from "reactstrap";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import "./style.css"
 import Campo from "../../components/Campo";
-import { useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
+// import { useHistory } from "react-router-dom";
 
 export default function Login() {
-  const history = useHistory();
+  // const history = useHistory();
 
   const initialValues = {
     email: '',
@@ -23,6 +24,7 @@ export default function Login() {
       <Row>
         <Col md={12} className="mb-5 mt-5">
           <h1>E-Commerce-App</h1>
+          <h2>Login</h2>
         </Col>
       </Row>
       <Formik
@@ -55,10 +57,25 @@ export default function Login() {
               placeholderInput="Digite a senha do usuario"
               erro={(errors.senha && touched.senha) ? (<Alert color="danger">{errors.senha}</Alert>) : null}
             />
-            <div className="button-container">
-              <Button color="primary" type="submit">Salvar</Button>
-              <Button color="danger" type="reset">Limpar</Button>
-            </div>
+            <Row>
+              <Col md={12} className="button-container">
+                <ButtonGroup>
+                  <Button color="primary" type="submit">Entrar</Button>
+                  <Button color="info" type="submit">
+                    <Link
+                      to="/home"
+                      style={{
+                        textDecoration: 'none',
+                        color: 'white'
+                      }}
+                    >
+                      Criar cadastro
+                    </Link>
+                  </Button>
+                  <Button color="danger" type="reset">Limpar</Button>
+                </ButtonGroup>
+              </Col>
+            </Row>
           </Form>
         )}
       </Formik>

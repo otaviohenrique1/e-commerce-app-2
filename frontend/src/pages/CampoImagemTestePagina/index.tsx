@@ -1,46 +1,6 @@
-import { useState } from "react";
-import { Col, Container, Row } from "reactstrap";
-import MultiImageInput from 'react-multiple-image-input';
-import "./style.css";
-
-export default function CampoImagem() {
-  const crop = {
-    unit: '%',
-    aspect: 4 / 3,
-    width: '100'
-  };
- 
-  const [images, setImages] = useState({});
-  
-  return (
-    <Container>
-      <Row>
-        <Col md={12} className="mb-5 mt-5">
-          <h1>Campo Imagem</h1>
-        </Col>
-        <Col className="mt-5">
-          <MultiImageInput
-            theme={{
-              background: '#ffffff',
-              outlineColor: '#111111',
-              textColor: 'rgba(255,255,255,0.6)',
-              buttonColor: '#ff0e1f',
-              modalColor: '#ffffff',
-            }}
-            max={10}
-            images={images}
-            setImages={setImages}
-            cropConfig={{ crop, ruleOfThirds: true, }}
-          />
-        </Col>
-      </Row>
-    </Container>
-  );
-}
-
-/*
 import { ChangeEvent, useState } from "react";
 import { Col, Container, Row } from "reactstrap";
+import { FiPlus } from "react-icons/fi";
 import "./style.css";
 
 export default function CampoImagem() {
@@ -85,9 +45,8 @@ export default function CampoImagem() {
             <label
               htmlFor="image[]"
               className="new-image"
-              style={{fontSize: 100 }}
             >
-              {'^'}
+              <FiPlus size={24} color="#15b6d6" />
             </label>
           </div>
           <input
@@ -101,4 +60,3 @@ export default function CampoImagem() {
     </Container>
   );
 }
-*/

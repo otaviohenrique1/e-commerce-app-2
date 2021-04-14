@@ -30,18 +30,30 @@ export default {
 
     const produtoRepository = getRepository(Produto);
 
+    const requestImages = request.files as Express.Multer.File[];
+    
+    const images = requestImages.map(image => {
+      return {  path: image.filename}
+    });
+
     const data = {
       nome,
       descricao,
       preco,
-      publicacao
+      publicacao,
+      images
     };
 
     const schema = Yup.object().shape({
       nome: Yup.string().required(),
       descricao: Yup.string().required(),
       preco: Yup.number().required(),
-      publicacao: Yup.date().required()
+      publicacao: Yup.date().required(),
+      images: Yup.array(
+        Yup.object().shape({
+            path: Yup.string().required()
+        })
+      )
     });
 
     await schema.validate(data, {

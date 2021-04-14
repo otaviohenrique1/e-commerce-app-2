@@ -9,7 +9,7 @@ export default function PaginaErro404() {
       <h2>Pagina não encontrada</h2>
       <div className="mt-5">
         <Button color="primary">
-          <Link to="/">Voltar para a home</Link>
+          <Link to="/home">Voltar para a home</Link>
         </Button>
       </div>
     </div>

@@ -4,9 +4,33 @@ import * as Yup from "yup";
 import "./style.css"
 import Campo from "../../components/Campo";
 import { useHistory } from "react-router-dom";
+import { FiPlus, FiDelete } from "react-icons/fi";
+import { ChangeEvent, useState } from "react";
+import api from "../../services/api";
+
+interface FormTypes {
+  nome: string;
+  descricao: string;
+  preco: string;
+  publicacao: string;
+}
 
 export default function ProdutoCadastro() {
   const history = useHistory();
+  const [images, setImages] = useState<File[]>([]);
+  const [previewImages, setPreviewImages] = useState<string[]>([]);
+
+  function handleSelectImages(event: ChangeEvent<HTMLInputElement>) {
+    if (!event.target.files) {
+      return;
+    }
+    const selectedImages = Array.from(event.target.files);
+    setImages(selectedImages);
+    const selectedImagesPreview = selectedImages.map(image => {
+      return URL.createObjectURL(image);
+    });
+    setPreviewImages(selectedImagesPreview);
+  }
 
   const initialValues = {
     nome: '',
@@ -22,6 +46,25 @@ export default function ProdutoCadastro() {
     publicacao: Yup.date().required('O campo publicação é obrigatorio'),
   });
 
+  async function handleSubmitForm(values: FormTypes) {
+    const data = new FormData();
+
+    data.append('nome', values.nome);
+    data.append('descricao', values.descricao);
+    data.append('preco', values.preco);
+    data.append('publicacao', values.publicacao);
+    images.forEach(image => {
+      data.append('images', image);
+    });
+
+    await api.post('produtos', data);
+
+    // console.log(data);
+
+    alert('Cadastro realizado com sucesso!');
+    history.push('/produtos');
+  }
+
   return (
     <Container>
       <Row>
@@ -32,16 +75,7 @@ export default function ProdutoCadastro() {
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
-        onSubmit={(values) => {
-          const data = new FormData();
-          data.append('nome', values.nome);
-          data.append('descricao', values.descricao);
-          data.append('preco', values.preco);
-          data.append('publicacao', values.publicacao);
-          console.log(data);
-          alert('Cadastro realizado com sucesso!');
-          history.push('/produto-lista');
-        }}
+        onSubmit={(values) => handleSubmitForm(values)}
       >
         {({errors, touched}) => (
           <Form>
@@ -81,6 +115,42 @@ export default function ProdutoCadastro() {
               placeholderInput="Digite a data de publicacao do produto"
               erro={(errors.publicacao && touched.publicacao) ? (<Alert color="danger">{errors.publicacao}</Alert>) : null}
             />
+            <Row className="mt-3">
+              <Col>
+                <div className="input-block">
+                  <label htmlFor="images">Fotos</label>
+                  <div className="images-container mt-2">
+                    { previewImages.map(image => {
+                      return (
+                        <img
+                          key={image}
+                          src={image}
+                          alt="imagem-produto"
+                        />
+                      );
+                    }) }
+                    <label
+                      htmlFor="image[]"
+                      className="new-image"
+                    >
+                      <FiPlus size={24} color="#15b6d6" />
+                    </label>
+                    <label className="new-image" onClick={() => {
+                      setImages([]);
+                      setPreviewImages([]);
+                    }}>
+                      <FiDelete size={24} color="red" />
+                    </label>
+                  </div>
+                  <input
+                    multiple
+                    onChange={handleSelectImages}
+                    type="file"
+                    id="image[]"
+                  />
+                </div>
+              </Col>
+            </Row>
             <div className="button-container">
               <Button color="primary" type="submit">Salvar</Button>
               <Button color="danger" type="reset">Limpar</Button>
