@@ -2,9 +2,13 @@ label {
   margin-bottom: 0 !important;
 }
 
+.button-container,
+.novo-usuario-btn {
+  text-align: right !important;
+}
+
 .button-container {
   margin-top: 30px;
-  text-align: right !important;
 }
 
 /* .button-container button:last-child {

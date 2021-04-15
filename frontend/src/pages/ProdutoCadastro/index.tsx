@@ -1,4 +1,4 @@
-import { Container, Row, Col, Button, Alert } from "reactstrap";
+import { Row, Col, Button, Alert } from "reactstrap";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import "./style.css"
@@ -66,7 +66,7 @@ export default function ProdutoCadastro() {
   }
 
   return (
-    <Container>
+    <>
       <Row>
         <Col md={12} className="mb-5 mt-5">
           <h1>Cadastro de Produtos</h1>
@@ -158,6 +158,6 @@ export default function ProdutoCadastro() {
           </Form>
         )}
       </Formik>
-    </Container>
+    </>
   );
 }

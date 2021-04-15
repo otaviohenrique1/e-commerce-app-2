@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Navbar, Collapse, Nav, NavbarBrand, NavbarToggler, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem } from "reactstrap";
+import { FiUser } from "react-icons/fi";
 import './style.css'
 
 export default function Header() {
@@ -31,12 +32,29 @@ export default function Header() {
             <UncontrolledDropdown nav inNavbar>
               <DropdownToggle nav caret>Usuarios</DropdownToggle>
               <DropdownMenu right>
-                <DropdownItem>
+                {/* <DropdownItem>
                   <Link className="nav-item-link" to="/usuario/cadastro">Cadastro</Link>
+                </DropdownItem>
+                <DropdownItem divider /> */}
+                <DropdownItem>
+                  <Link className="nav-item-link" to="/usuarios">Lista</Link>
+                </DropdownItem>
+              </DropdownMenu>
+            </UncontrolledDropdown>
+          </Nav>
+          <DropdownItem divider />
+          <Nav navbar>
+            <UncontrolledDropdown nav inNavbar>
+              <DropdownToggle nav caret>
+                <FiUser size={20} color="gray" className="avatar-user" />
+              </DropdownToggle>
+              <DropdownMenu right>
+                <DropdownItem>
+                  <Link className="nav-item-link" to="/usuarios/:id">Cadastro</Link>
                 </DropdownItem>
                 <DropdownItem divider />
                 <DropdownItem>
-                  <Link className="nav-item-link" to="/usuarios">Lista</Link>
+                  <Link className="nav-item-link" to="/">Sair</Link>
                 </DropdownItem>
               </DropdownMenu>
             </UncontrolledDropdown>

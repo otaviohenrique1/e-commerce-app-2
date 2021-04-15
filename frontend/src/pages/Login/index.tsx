@@ -57,21 +57,21 @@ export default function Login() {
               placeholderInput="Digite a senha do usuario"
               erro={(errors.senha && touched.senha) ? (<Alert color="danger">{errors.senha}</Alert>) : null}
             />
+            {/* <Label>adasd</Label> */}
             <Row>
+              <Col md={12} className="novo-usuario-btn ">
+                <Link
+                  to="/usuario/cadastro"
+                  style={{
+                    textDecoration: 'none',
+                    color: 'white'
+                  }}>
+                  <Button color="info" type="button">Novo usuario</Button>
+                </Link>
+              </Col>
               <Col md={12} className="button-container">
                 <ButtonGroup>
                   <Button color="primary" type="submit">Entrar</Button>
-                  <Button color="info" type="submit">
-                    <Link
-                      to="/home"
-                      style={{
-                        textDecoration: 'none',
-                        color: 'white'
-                      }}
-                    >
-                      Criar cadastro
-                    </Link>
-                  </Button>
                   <Button color="danger" type="reset">Limpar</Button>
                 </ButtonGroup>
               </Col>

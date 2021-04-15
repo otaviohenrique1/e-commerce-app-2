@@ -1,4 +1,70 @@
 import { useEffect, useState } from "react";
+import { Item } from "../../components/Item";
+import api from "../../services/api";
+import { listaProdutosTeste } from "../../utils/lista-produtos-teste";
+
+interface Produto {
+  nome: string;
+  preco: number;
+}
+
+export default function ListaProdutos() {
+  const [produto, setProduto] = useState<Produto[]>([]);
+
+  useEffect(() => {
+    api.get(`produtos`)
+      .then((response) => {
+        setProduto(response.data)
+      });
+  }, []);
+
+  useEffect(() => {
+    setProduto(listaProdutosTeste);
+  }, [produto]);
+
+  function handleView() {
+    alert('Exibir Produto');
+  }
+
+  function handleUpdate() {
+    alert('Editar Produto');
+  }
+
+  function handleDelete() {
+    alert('Remover Produto');
+  }
+
+  return (
+    <>
+      <h1 className="mb-5 mt-5">Lista de Produtos</h1>
+      <h3>{produto.length}</h3>
+      <div>
+        {(produto.length !== 0) ? (
+          produto.map((item, index) => {
+            return (
+              <Item
+                key={index}
+                valorCampo1={`Nome: ${item.nome}`}
+                valorCampo2={`Preço: R$ ${item.preco.toFixed(2)}`}
+                exibeBotoes={true}
+                onClickView={handleView}
+                onClickUpdate={handleUpdate}
+                onClickDelete={handleDelete}
+              />
+            );
+          })
+        ) : (
+          <div>
+            <h1>Lista vazia</h1>
+          </div>
+        )}
+      </div>
+    </>
+  );
+}
+
+/*
+import { useEffect, useState } from "react";
 import { ItemProduto } from "../../components/Item";
 import api from "../../services/api";
 
@@ -55,6 +121,7 @@ export default function ListaProdutos() {
     </>
   );
 }
+*/
 
 /*
 const listaProdutos = [

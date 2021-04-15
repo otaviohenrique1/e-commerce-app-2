@@ -1,15 +1,15 @@
-import { Container, Row, Col, Button, Alert } from "reactstrap";
+import { Container, Row, Col, Button, Alert, ButtonGroup } from "reactstrap";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import "./style.css"
 import Campo from "../../components/Campo";
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import api from "../../services/api";
 
 interface FormTypes {
-    nome: string;
-    email: string;
-    senha: string;
+  nome: string;
+  email: string;
+  senha: string;
 }
 
 export default function CadastroUsuarios() {
@@ -23,8 +23,8 @@ export default function CadastroUsuarios() {
   
   const validationSchema = Yup.object().shape({
     nome: Yup.string().required('O campo nome é obrigatorio'),
-    descricao: Yup.string().required('O campo email é obrigatorio'),
-    preco: Yup.string().required('O campo senha é obrigatorio'),
+    email: Yup.string().required('O campo email é obrigatorio'),
+    senha: Yup.string().required('O campo senha é obrigatorio'),
   });
 
   async function handleSubmitForm(values: FormTypes) {
@@ -32,10 +32,10 @@ export default function CadastroUsuarios() {
     data.append('nome', values.nome);
     data.append('email', values.email);
     data.append('senha', values.senha);
-    await api.post('produtos', data);
+    await api.post('usuarios', data);
     // console.log(data);
     alert('Cadastro realizado com sucesso!');
-    history.push('/usuarios');
+    history.push('/');
   }
 
   return (
@@ -80,8 +80,15 @@ export default function CadastroUsuarios() {
               erro={(errors.senha && touched.senha) ? (<Alert color="danger">{errors.senha}</Alert>) : null}
             />
             <div className="button-container">
-              <Button color="primary" type="submit">Salvar</Button>
-              <Button color="danger" type="reset">Limpar</Button>
+              <ButtonGroup>
+                <Button color="primary" type="submit">Salvar</Button>
+                <Button color="danger" type="reset">Limpar</Button>
+                <Link to="/" style={{ textDecoration: "none", color: "white" }}>
+                  <Button color="secondary" type="button">
+                    Voltar
+                  </Button>
+                </Link>
+              </ButtonGroup>
             </div>
           </Form>
         )}

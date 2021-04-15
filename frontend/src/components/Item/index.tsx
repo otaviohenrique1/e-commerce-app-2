@@ -7,6 +7,59 @@ interface ItemProps {
   onClickView?: () => void;
   onClickUpdate?: () => void;
   onClickDelete?: () => void;
+  exibeBotoes?: boolean;
+}
+
+export const Item: React.FC<ItemProps> = ({ valorCampo1, valorCampo2, onClickView, onClickUpdate, onClickDelete, exibeBotoes}) => {
+  return (
+    <ListGroup className="mb-3">
+      <ListGroupItem>{valorCampo1}</ListGroupItem>
+      <ListGroupItem>{valorCampo2}</ListGroupItem>
+      {(exibeBotoes) && (
+        <ListGroupItem>
+          <Row>
+            <Col md={12} style={{ textAlign: 'right' }}>
+              <ButtonGroup>
+                <Button
+                  type="button"
+                  color="info"
+                  onClick={onClickView}
+                >
+                  Exibir
+                </Button>
+                <Button
+                  type="button"
+                  color="primary"
+                  onClick={onClickUpdate}
+                >
+                  Alterar
+                </Button>
+                  <Button
+                    type="button"
+                    color="danger"
+                    onClick={onClickDelete}
+                  >
+                    Remover
+                  </Button>
+              </ButtonGroup>
+            </Col>
+          </Row>
+        </ListGroupItem>
+      )}
+    </ListGroup>
+  );
+}
+
+/*
+import React from "react";
+import { Button, ButtonGroup, Col, ListGroup, ListGroupItem, Row } from "reactstrap";
+
+interface ItemProps {
+  valorCampo1?: any;
+  valorCampo2?: any;
+  onClickView?: () => void;
+  onClickUpdate?: () => void;
+  onClickDelete?: () => void;
 }
 
 interface ItemProdutoProps extends ItemProps {
@@ -80,6 +133,7 @@ export const ItemUsuario: React.FC<ItemUsuarioProps> = ({ nome, email, onClickVi
     />
   );
 }
+*/
 
 /*
 interface ItemProps {

@@ -8,7 +8,6 @@ import UsuarioCadastro from "./pages/UsuarioCadastro";
 import UsuarioLista from "./pages/UsuarioLista";
 import ProdutoDados from "./pages/ProdutoDados";
 import UsuarioDados from "./pages/UsuarioDados";
-import CampoImagemTestePagina from "./pages/CampoImagemTestePagina";
 // import PaginaErro404 from "./pages/PaginaErro404";
 
 export default function Routes() {
@@ -17,15 +16,14 @@ export default function Routes() {
       <BrowserRouter>
           <Switch>
             <Route exact component={Login} path="/" />
+            <Route component={UsuarioCadastro} path="/usuario/cadastro" />
             <PageContainer>
               <Route component={Home} path="/home" />
               <Route component={ProdutoCadastro} path="/produto/cadastro" />
-              <Route component={UsuarioCadastro} path="/usuario/cadastro" />
-              <Route component={ProdutoLista} path="/produtos" />
-              <Route component={UsuarioLista} path="/usuarios" />
-              <Route component={ProdutoDados} path="/produtos/1" />
-              <Route component={UsuarioDados} path="/usuarios/1" />
-              <Route component={CampoImagemTestePagina} path="/campo-imagem" />
+              <Route exact component={ProdutoLista} path="/produtos" />
+              <Route exact component={UsuarioLista} path="/usuarios" />
+              <Route component={ProdutoDados} path="/produtos/:id" />
+              <Route component={UsuarioDados} path="/usuarios/:id" />
               {/* <Route component={PaginaErro404} path="*" /> */}
             </PageContainer>
           </Switch>
