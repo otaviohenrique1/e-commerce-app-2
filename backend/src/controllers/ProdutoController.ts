@@ -21,51 +21,50 @@ export default {
     return response.json(produtoView.render(produto));
   },
   async create(request: Request, response: Response) {
-    const {
-      nome,
-      descricao,
-      preco,
-      publicacao
-    } = request.body;
-
+    const { nome, descricao, preco, publicacao } = request.body;
     const produtoRepository = getRepository(Produto);
-
     const requestImages = request.files as Express.Multer.File[];
-    
     const images = requestImages.map(image => {
       return {  path: image.filename}
     });
-
-    const data = {
-      nome,
-      descricao,
-      preco,
-      publicacao,
-      images
-    };
-
+    const data = { nome, descricao, preco, publicacao, images };
     const schema = Yup.object().shape({
       nome: Yup.string().required(),
       descricao: Yup.string().required(),
       preco: Yup.number().required(),
       publicacao: Yup.date().required(),
-      images: Yup.array(
-        Yup.object().shape({
-            path: Yup.string().required()
-        })
-      )
+      images: Yup.array(Yup.object().shape({ path: Yup.string().required() }))
     });
-
+    await schema.validate(data, { abortEarly: false });
+    const produto = produtoRepository.create(data);
+    await produtoRepository.save(produto);
+    return response.status(201).json(produto);
+  },
+  async delete(request: Request, response: Response) {
+    const { id } = request.params;
+    const produtoRepository = getRepository(Produto);
+    const produto = await produtoRepository.delete(id);
+    return response.status(201).json(produto);
+  },
+  async update(request: Request, response: Response) {
+    const { id, nome, descricao, preco, publicacao } = request.body;
+    const produtoRepository = getRepository(Produto);
+    const requestImages = request.files as Express.Multer.File[];
+    const images = requestImages.map(image => {
+      return {  path: image.filename}
+    });
+    const data = { nome, descricao, preco, publicacao, images };
+    const schema = Yup.object().shape({
+      nome: Yup.string().required(),
+      descricao: Yup.string().required(),
+      preco: Yup.number().required(),
+      publicacao: Yup.date().required(),
+      images: Yup.array(Yup.object().shape({ path: Yup.string().required() }))
+    });
     await schema.validate(data, {
       abortEarly: false
     });
-
-    const produto = produtoRepository.create(data);
-
-    await produtoRepository.save(produto);
-
-    return response.status(201).json(produto);
+    const usuario = await produtoRepository.update(id, data);
+    return response.status(201).json(usuario);
   },
-  async delete(request: Request, response: Response) {},
-  async update(request: Request, response: Response) {},
 };

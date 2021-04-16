@@ -19,7 +19,7 @@ export class createProdutos1617998425715 implements MigrationInterface {
         },
         {
           name: 'descricao',
-          type: 'varchar'
+          type: 'text'
         },
         {
           name: 'preco',

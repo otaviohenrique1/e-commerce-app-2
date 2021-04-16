@@ -19,7 +19,7 @@ export default class Produto {
   publicacao: string;
 
   @OneToMany(() => Image, image => image.produto, {
-      cascade: ['insert', 'update']
+      cascade: ['insert', 'update', "remove"]
   })
   @JoinColumn({ name: 'produto_id' })
   images: Image[];

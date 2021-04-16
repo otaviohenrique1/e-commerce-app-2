@@ -17,34 +17,34 @@ export default {
     return response.json(usuarioView.render(usuario));
   },
   async create(request: Request, response: Response) {
-    const {
-      nome,
-      email,
-      senha
-    } = request.body;
-
+    const { nome, email, senha } = request.body;
     const usuarioRepository = getRepository(Usuario);
-
-    const data = {
-      nome,
-      email,
-      senha
-    };
-
+    const data = { nome, email, senha };
     const schema = Yup.object().shape({
       nome: Yup.string().required(),
       email: Yup.string().required(),
       senha: Yup.string().required()
     });
-
     await schema.validate(data, {
       abortEarly: false
     });
-
     const usuario = usuarioRepository.create(data);
-
     await usuarioRepository.save(usuario);
-
     return response.status(201).json(usuario);
-  }
+  },
+  async update(request: Request, response: Response) {
+    const { id, nome, email, senha } = request.body;
+    const usuarioRepository = getRepository(Usuario);
+    const data = { nome, email, senha };
+    const schema = Yup.object().shape({
+      nome: Yup.string().required(),
+      email: Yup.string().required(),
+      senha: Yup.string().required()
+    });
+    await schema.validate(data, {
+      abortEarly: false
+    });
+    const usuario = await usuarioRepository.update(id, data);
+    return response.status(201).json(usuario);
+  },
 };

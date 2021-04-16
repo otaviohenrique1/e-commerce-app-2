@@ -10,9 +10,9 @@ const upload = multer(uploadConfig);
 routes.get('/produtos', ProdutoController.index)
 routes.get('/produtos/:id', ProdutoController.show)
 routes.post('/produtos', ProdutoController.create);
+routes.post('/produtos', upload.array('images'), ProdutoController.create);
 routes.get('/usuarios', UsuarioController.index)
 routes.get('/usuarios/:id', UsuarioController.show)
 routes.post('/usuarios', UsuarioController.create);
-routes.post('/usuarios', upload.array('images'), ProdutoController.create);
 
 export default routes;
