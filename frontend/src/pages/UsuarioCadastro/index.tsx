@@ -83,8 +83,12 @@ export default function CadastroUsuarios() {
               <ButtonGroup>
                 <Button color="primary" type="submit">Salvar</Button>
                 <Button color="danger" type="reset">Limpar</Button>
-                <Link to="/" style={{ textDecoration: "none", color: "white" }}>
-                  <Button color="secondary" type="button">
+                <Link to="/" className="btn-item-link">
+                  <Button
+                    color="secondary"
+                    type="button"
+                    className="btn-voltar"
+                  >
                     Voltar
                   </Button>
                 </Link>

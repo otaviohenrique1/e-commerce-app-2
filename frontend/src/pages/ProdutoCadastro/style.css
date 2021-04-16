@@ -7,8 +7,10 @@ label {
   text-align: right;
 }
 
-.button-container button:last-child {
-  margin-left: 10px;
+.btn-imagem-area {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 10px;
 }
 
 /* ----------------------------------------- */

@@ -1,12 +1,12 @@
-import { Row, Col, Button, Alert } from "reactstrap";
+import { Row, Col, Button, Alert, ButtonGroup } from "reactstrap";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import "./style.css"
 import Campo from "../../components/Campo";
 import { useHistory } from "react-router-dom";
-import { FiPlus, FiDelete } from "react-icons/fi";
+import { FiPlus, FiDelete, FiTrash } from "react-icons/fi";
 import { ChangeEvent, useState } from "react";
-import api from "../../services/api";
+// import api from "../../services/api";
 
 interface FormTypes {
   nome: string;
@@ -57,9 +57,9 @@ export default function ProdutoCadastro() {
       data.append('images', image);
     });
 
-    await api.post('produtos', data);
-
+    console.log(data.get('publicacao'));
     // console.log(data);
+    // await api.post('produtos', data);
 
     alert('Cadastro realizado com sucesso!');
     history.push('/produtos');
@@ -129,18 +129,23 @@ export default function ProdutoCadastro() {
                         />
                       );
                     }) }
-                    <label
-                      htmlFor="image[]"
-                      className="new-image"
-                    >
-                      <FiPlus size={24} color="#15b6d6" />
-                    </label>
-                    <label className="new-image" onClick={() => {
-                      setImages([]);
-                      setPreviewImages([]);
-                    }}>
-                      <FiDelete size={24} color="red" />
-                    </label>
+                    <div className="btn-imagem-area">
+                      <label
+                        htmlFor="image[]"
+                        className="new-image"
+                      >
+                        <FiPlus size={24} color="#15b6d6" />
+                      </label>
+                      <label className="new-image">
+                        <FiDelete size={24} color="red" />
+                      </label>
+                      <label className="new-image" onClick={() => {
+                        setImages([]);
+                        setPreviewImages([]);
+                      }}>
+                        <FiTrash size={24} color="red" />
+                      </label>
+                    </div>
                   </div>
                   <input
                     multiple
@@ -152,8 +157,10 @@ export default function ProdutoCadastro() {
               </Col>
             </Row>
             <div className="button-container">
-              <Button color="primary" type="submit">Salvar</Button>
-              <Button color="danger" type="reset">Limpar</Button>
+              <ButtonGroup>
+                <Button color="primary" type="submit">Salvar</Button>
+                <Button color="danger" type="reset">Limpar</Button>
+              </ButtonGroup>
             </div>
           </Form>
         )}

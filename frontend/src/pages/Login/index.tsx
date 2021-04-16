@@ -3,11 +3,10 @@ import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import "./style.css"
 import Campo from "../../components/Campo";
-import { Link } from "react-router-dom";
-// import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 export default function Login() {
-  // const history = useHistory();
+  const history = useHistory();
 
   const initialValues = {
     email: '',
@@ -34,7 +33,8 @@ export default function Login() {
           const data = new FormData();
           data.append('email', values.email);
           data.append('senha', values.senha);
-          console.log(data);
+          // console.log(data);
+          history.push("/home");
         }}
       >
         {({errors, touched}) => (
@@ -57,7 +57,6 @@ export default function Login() {
               placeholderInput="Digite a senha do usuario"
               erro={(errors.senha && touched.senha) ? (<Alert color="danger">{errors.senha}</Alert>) : null}
             />
-            {/* <Label>adasd</Label> */}
             <Row>
               <Col md={12} className="novo-usuario-btn ">
                 <Link

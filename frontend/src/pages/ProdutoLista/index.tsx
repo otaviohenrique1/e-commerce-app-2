@@ -4,6 +4,7 @@ import api from "../../services/api";
 import { listaProdutosTeste } from "../../utils/lista-produtos-teste";
 
 interface Produto {
+  id: number;
   nome: string;
   preco: number;
 }
@@ -23,11 +24,7 @@ export default function ListaProdutos() {
   }, [produto]);
 
   function handleView() {
-    alert('Exibir Produto');
-  }
-
-  function handleUpdate() {
-    alert('Editar Produto');
+    // alert('Exibir Produto');
   }
 
   function handleDelete() {
@@ -37,7 +34,7 @@ export default function ListaProdutos() {
   return (
     <>
       <h1 className="mb-5 mt-5">Lista de Produtos</h1>
-      <h3>{produto.length}</h3>
+      {/* <h3>{produto.length}</h3> */}
       <div>
         {(produto.length !== 0) ? (
           produto.map((item, index) => {
@@ -48,8 +45,8 @@ export default function ListaProdutos() {
                 valorCampo2={`Preço: R$ ${item.preco.toFixed(2)}`}
                 exibeBotoes={true}
                 onClickView={handleView}
-                onClickUpdate={handleUpdate}
                 onClickDelete={handleDelete}
+                id={(item.id).toString()}
               />
             );
           })

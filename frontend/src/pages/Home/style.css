@@ -1,0 +1,9 @@
+div.area-btn-home {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 10px;
+}
+
+button.btn-home {
+  padding: 100px;
+}

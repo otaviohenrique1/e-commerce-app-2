@@ -1,5 +1,7 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { Button, ButtonGroup, Col, ListGroup, ListGroupItem, Row } from "reactstrap";
+import './style.css';
 
 interface ItemProps {
   valorCampo1?: any;
@@ -8,9 +10,10 @@ interface ItemProps {
   onClickUpdate?: () => void;
   onClickDelete?: () => void;
   exibeBotoes?: boolean;
+  id?: string;
 }
 
-export const Item: React.FC<ItemProps> = ({ valorCampo1, valorCampo2, onClickView, onClickUpdate, onClickDelete, exibeBotoes}) => {
+export const Item: React.FC<ItemProps> = ({ valorCampo1, valorCampo2, onClickView, onClickUpdate, onClickDelete, exibeBotoes, id}) => {
   return (
     <ListGroup className="mb-3">
       <ListGroupItem>{valorCampo1}</ListGroupItem>
@@ -20,27 +23,26 @@ export const Item: React.FC<ItemProps> = ({ valorCampo1, valorCampo2, onClickVie
           <Row>
             <Col md={12} style={{ textAlign: 'right' }}>
               <ButtonGroup>
-                <Button
-                  type="button"
-                  color="info"
-                  onClick={onClickView}
+                <Link
+                  className='btn-item-link'
+                  to={`/produtos/${id}`}
                 >
-                  Exibir
-                </Button>
-                <Button
-                  type="button"
-                  color="primary"
-                  onClick={onClickUpdate}
-                >
-                  Alterar
-                </Button>
                   <Button
                     type="button"
-                    color="danger"
-                    onClick={onClickDelete}
+                    color="info"
+                    onClick={onClickView}
+                    className="btn-editar"
                   >
-                    Remover
+                    Exibir
                   </Button>
+                </Link>
+                <Button
+                  type="button"
+                  color="danger"
+                  onClick={onClickDelete}
+                >
+                  Remover
+                </Button>
               </ButtonGroup>
             </Col>
           </Row>

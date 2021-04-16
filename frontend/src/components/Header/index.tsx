@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Navbar, Collapse, Nav, NavbarBrand, NavbarToggler, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem } from "reactstrap";
-import { FiUser } from "react-icons/fi";
+import { FiShoppingCart, FiUser } from "react-icons/fi";
 import './style.css'
 
 export default function Header() {
@@ -11,8 +11,10 @@ export default function Header() {
   return (
     <>
       <Navbar color="dark" dark expand="md">
-        <NavbarBrand >
-          <Link className="nav-item-link" to="/home">E-Commerce-App</Link>
+        <NavbarBrand>
+          <Link className="nav-item-link" to="/home">
+            <FiShoppingCart className="mr-2" color="white"/>E-Commerce-App
+          </Link>
         </NavbarBrand>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
@@ -32,10 +34,6 @@ export default function Header() {
             <UncontrolledDropdown nav inNavbar>
               <DropdownToggle nav caret>Usuarios</DropdownToggle>
               <DropdownMenu right>
-                {/* <DropdownItem>
-                  <Link className="nav-item-link" to="/usuario/cadastro">Cadastro</Link>
-                </DropdownItem>
-                <DropdownItem divider /> */}
                 <DropdownItem>
                   <Link className="nav-item-link" to="/usuarios">Lista</Link>
                 </DropdownItem>

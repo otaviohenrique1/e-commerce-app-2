@@ -38,6 +38,36 @@ export default function UsuarioDados() {
   );
 }
 
+
+interface DadosUsuarioProps {
+  nome: string;
+  email: string;
+  senha: string;
+  onCallback: () => void;
+}
+
+const DadosUsuario = ({ nome, email, senha, onCallback }: DadosUsuarioProps) => {
+  return (
+    <ListGroup>
+      <ListGroupItem>
+        <Label>{`Nome: ${nome}`}</Label>
+      </ListGroupItem>
+      <ListGroupItem>
+        <Label>{`Email: ${email}`}</Label>
+      </ListGroupItem>
+      <ListGroupItem>
+        <Label>{`Senha: ${senha}`}</Label>
+      </ListGroupItem>
+      <ListGroupItem style={{ textAlign: 'right' }}>
+        <Button
+          color="info"
+          onClick={onCallback}
+        >Alterar</Button>
+      </ListGroupItem>
+    </ListGroup>
+  );
+}
+
 interface FormTypes {
   nome: string;
   email: string;
@@ -120,35 +150,6 @@ const FormularioEdicaoDadosUsuario = ({ nome, email, senha, onCallback }: DadosU
         </Form>
       )}
     </Formik>
-  );
-}
-
-interface DadosUsuarioProps {
-  nome: string;
-  email: string;
-  senha: string;
-  onCallback: () => void;
-}
-
-const DadosUsuario = ({ nome, email, senha, onCallback }: DadosUsuarioProps) => {
-  return (
-    <ListGroup>
-      <ListGroupItem>
-        <Label>{`Nome: ${nome}`}</Label>
-      </ListGroupItem>
-      <ListGroupItem>
-        <Label>{`Email: ${email}`}</Label>
-      </ListGroupItem>
-      <ListGroupItem>
-        <Label>{`Senha: ${senha}`}</Label>
-      </ListGroupItem>
-      <ListGroupItem style={{ textAlign: 'right' }}>
-        <Button
-          color="info"
-          onClick={onCallback}
-        >Alterar</Button>
-      </ListGroupItem>
-    </ListGroup>
   );
 }
 
