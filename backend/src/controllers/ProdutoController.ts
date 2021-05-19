@@ -25,7 +25,7 @@ export default {
     const produtoRepository = getRepository(Produto);
     const requestImages = request.files as Express.Multer.File[];
     const images = requestImages.map(image => {
-      return {  path: image.filename}
+      return { path: image.filename}
     });
     const data = { nome, descricao, preco, publicacao, images };
     const schema = Yup.object().shape({
