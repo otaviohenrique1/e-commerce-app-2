@@ -58,7 +58,7 @@ export default function Login() {
               erro={(errors.senha && touched.senha) ? (<Alert color="danger">{errors.senha}</Alert>) : null}
             />
             <Row>
-              <Col md={12} className="novo-usuario-btn ">
+              <Col md={12} className="novo-usuario-btn">
                 <Link
                   to="/usuario/cadastro"
                   style={{
